@@ -6,7 +6,6 @@
     exa
     starship
     neovim
-    redis
     fzf
     fzy
     ripgrep

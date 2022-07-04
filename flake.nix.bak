@@ -13,8 +13,7 @@
     let
       darwinFlakeOutput = mk-darwin-system.mkDarwinSystem.m1 {
         # Provide your nix modules to enable configurations on your system.
-        modules = [
-          # You might want to split them into separate files
+        modules = [ # You might want to split them into separate files
           #  ./modules/host-one-module.nix
           #  ./modules/user-one-module.nix
           #  ./modules/user-two-module.nix
