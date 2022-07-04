@@ -14,17 +14,7 @@
         hanan = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
-            ({ pkgs, lib, ... }: {
-              home.stateVersion = "22.05";
-              home.username = "hanan";
-              home.homeDirectory = "/Users/hanan";
-              home.packages = with pkgs;[
-                exa
-                starship
-                neovim
-                redis
-              ];
-            })
+            ./modules/home.nix
             ./modules/fish.nix
             ./modules/starship.nix
           ];

@@ -2,7 +2,13 @@
 
   let
     mkAfter = lib.mkAfter;
-    shellAliases = with pkgs;{ };
+    shellAliases = with pkgs;{
+      gss = "git status";
+      vim = "nvim";
+      cat = "bat";
+      ls = "exa -l";
+    };
+
   in
   {
     home = {
@@ -72,9 +78,5 @@
        set PATH "/Users/hanan/go/bin" $PATH
     '';
 
-    programs.fish.shellAliases = {
-      vim = "nvim";
-      cat = "bat";
-      ls = "exa -l";
-    };
+    programs.fish.shellAliases = shellAliases;
   })
