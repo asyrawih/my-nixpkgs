@@ -1,6 +1,5 @@
 {
   description = "Hanan Nix Configuration";
-
   inputs = {
     # change tag or commit of nixpkgs for your system
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -23,27 +22,21 @@
 
           # for configurable nix-darwin modules see
           # https://github.com/LnL7/nix-darwin/blob/master/modules/module-list.nix
+
           ({ config, pkgs, ... }: {
             environment.systemPackages = with pkgs; [ nixfmt ];
           })
 
-          # for configurable home-manager modules see:
-          # https://github.com/nix-community/home-manager/blob/master/modules/modules.nix
-          {
-            home-manager = {
-              # sharedModules = []; # per-user modules.
-              # extraSpecialArgs = {}; # pass aditional arguments to all modules.
-            };
-          }
-
           # An example of user environment. Change your username.
           ({ pkgs, lib, ... }: {
             users.users."hanan".home = "/Users/hanan";
+            home-manager.useUserPackages = true;
             home-manager.users."hanan" = {
               home.packages = with pkgs; [
                 exa
                 starship
                 neovim
+                redis
               ];
 
               programs.fish.enable = true;
@@ -60,26 +53,27 @@
               ];
 
               programs.fish.shellInit = ''
-                eval "$(/opt/homebrew/bin/brew shellenv)"
-                zoxide init fish | source
+                 eval "$(/opt/homebrew/bin/brew shellenv)"
+                 zoxide init fish | source
+                fish_add_path /opt/homebrew/opt/openjdk/bin
+                 for p in /run/current-system/sw/bin ~/bin
+                     if not contains $p $fish_user_paths
+                         set -g fish_user_paths $p $fish_user_paths
+                     end
+                 end
 
-                for p in /run/current-system/sw/bin ~/bin
-                    if not contains $p $fish_user_paths
-                        set -g fish_user_paths $p $fish_user_paths
-                    end
-                end
+                 # Config 
+                 fish_vi_key_bindings
+                 set -U fish_color_command 6CB6EB --bold
+                 set -U fish_color_redirection DEB974
+                 set -U fish_color_operator DEB974
+                 set -U fish_color_end C071D8 --bold
+                 set -U fish_color_error EC7279 --bold
+                 set -U fish_color_param 6CB6EB
+                 set fish_greeting
 
-                # Config 
-                fish_vi_key_bindings
-                set -U fish_color_command 6CB6EB --bold
-                set -U fish_color_redirection DEB974
-                set -U fish_color_operator DEB974
-                set -U fish_color_end C071D8 --bold
-                set -U fish_color_error EC7279 --bold
-                set -U fish_color_param 6CB6EB
-                set fish_greeting
-
-                set PATH "/Users/hanan/.composer/vendor/bin" $PATH
+                 set PATH "/Users/hanan/.composer/vendor/bin" $PATH
+                 set PATH "/Users/hanan/go/bin" $PATH
               '';
 
               programs.fish.shellAliases = {
@@ -113,9 +107,6 @@
                 };
               };
 
-              # create some custom dot-files on your user's home.
-              # home.file.".config/foo".text = "bar";
-
               programs.git = {
                 enable = true;
                 userName = "hanan";
@@ -127,12 +118,10 @@
           # for configurable nixos modules see (note that many of them might be linux-only):
           # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/module-list.nix
           ({ config, lib, ... }: {
-            # You can provide an overlay for packages not available or that fail to compile on arm.
-            #nixpkgs.overlays =
-            #  [ (self: super: { inherit (lib.mds.intelPkgs) pandoc; }) ];
-
-            # You can enable supported services (if they work on arm and are not linux only)
-            #services.lorri.enable = true;
+            services.redis = {
+              enable = true;
+              extraConfig = "--daemonize yes";
+            };
           })
         ];
       };
@@ -140,7 +129,6 @@
     darwinFlakeOutput
     // {
       # Your custom flake output here.
-      darwinConfigurations."Hanans-MacBook-Air" =
-        darwinFlakeOutput.darwinConfiguration.aarch64-darwin;
+      darwinConfigurations."Hanans-MacBook-Air" = darwinFlakeOutput.darwinConfiguration.aarch64-darwin;
     };
 }
