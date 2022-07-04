@@ -52,6 +52,16 @@
             sha256 = "1n6ibqcgsq1p8lblj334ym2qpdxwiyaahyybvpz93c8c9g4f9ipl";
           };
       }
+      {
+        name = "plugin-git";
+        src = pkgs.fetchFromGitHub
+          {
+            owner = "jhillyerd";
+            repo = "plugin-git";
+            rev = "cc5999fa296c18105fb62f1637deec1d12454129";
+            sha256 = "NaDZLmktuwlYxxzwDoVKgd8bEY+Wy9b2Qaz0CTf8V/Q=";
+          };
+      }
     ];
 
     programs.fish.shellInit = ''
