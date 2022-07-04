@@ -23,9 +23,10 @@
         };
       };
 
-      darwinConfiguration."hanan" = darwin.lib.darwinSystem {
+      darwinConfigurations."hanan" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
+          ./modules/activation.nix
           ./modules/redis.nix
         ];
       };
