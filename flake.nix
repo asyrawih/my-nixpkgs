@@ -27,7 +27,6 @@
             })
             ./modules/fish.nix
             ./modules/starship.nix
-            ./modules/redis.nix
           ];
         };
       };
