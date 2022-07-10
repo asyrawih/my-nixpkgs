@@ -8,6 +8,9 @@
     neovim
     fzf
     fzy
-    ripgrep
+    jq
+    rust-analyzer
+    rustc
+    cargo
   ];
 })

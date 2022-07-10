@@ -4,16 +4,20 @@
     mkAfter = lib.mkAfter;
     shellAliases = with pkgs;{
       gss = "git status";
+      e = "nvim";
       vim = "nvim";
       cat = "bat";
-      ls = "exa -l";
+      ls = "exa";
     };
 
   in
   {
-    home = {
-      packages = with pkgs.fishPlugins;[
-        pkgs.thefuck
+    home = with pkgs; {
+      sessionVariables = {
+        RUST_SRC_PATH = "${rust.packages.stable.rustPlatform.rustLibSrc}";
+      };
+      packages = with fishPlugins;[
+        thefuck
         # https://github.com/franciscolourenco/done
         done
         # use babelfish than foreign-env

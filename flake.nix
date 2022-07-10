@@ -21,6 +21,15 @@
             ./modules/starship.nix
           ];
         };
+        # TODO Should Add Packages Or Module On Indodax Envirotment
+        indodax = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./modules/home.nix
+            ./modules/fish.nix
+            ./modules/starship.nix
+          ];
+        };
       };
 
       darwinConfigurations."hanan" = darwin.lib.darwinSystem {
