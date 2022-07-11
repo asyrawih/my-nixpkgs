@@ -69,9 +69,10 @@
     ];
 
     programs.fish.shellInit = ''
-       eval "$(/opt/homebrew/bin/brew shellenv)"
+       eval "$(/usr/local/bin/brew shellenv)"
+
        zoxide init fish | source
-      fish_add_path /opt/homebrew/opt/openjdk/bin
+
        for p in /run/current-system/sw/bin ~/bin
            if not contains $p $fish_user_paths
                set -g fish_user_paths $p $fish_user_paths
@@ -88,8 +89,6 @@
        set -U fish_color_param 6CB6EB
        set fish_greeting
 
-       set PATH "/Users/hanan/.composer/vendor/bin" $PATH
-       set PATH "/Users/hanan/go/bin" $PATH
     '';
 
     programs.fish.shellAliases = shellAliases;

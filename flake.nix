@@ -8,7 +8,7 @@
 
   outputs = { self, home-manager, darwin, ... }@inputs:
     let
-      system = "aarch64-darwin";
+      system = "x86_64-darwin";
       pkgs = inputs.nixpkgs.legacyPackages.${system};
     in
     {
@@ -19,15 +19,8 @@
             ./modules/home.nix
             ./modules/fish.nix
             ./modules/starship.nix
-          ];
-        };
-        # TODO Should Add Packages Or Module On Indodax Envirotment
-        indodax = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./modules/home.nix
-            ./modules/fish.nix
-            ./modules/starship.nix
+            ./modules/golang.nix
+#E            ./modules/git.nix
           ];
         };
       };
