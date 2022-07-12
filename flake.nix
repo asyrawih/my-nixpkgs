@@ -20,7 +20,7 @@
             ./modules/fish.nix
             ./modules/starship.nix
             ./modules/golang.nix
-#E            ./modules/git.nix
+            #./modules/git.nix
           ];
         };
       };

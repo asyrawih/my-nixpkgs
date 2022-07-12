@@ -21,7 +21,6 @@
     wget
     tree
     gnupg # required for pass git
-    # pass # password management
     ack
     exa
     starship
@@ -40,5 +39,7 @@
     neofetch # fancy fetch information
     du-dust # fancy du
     imagemagick
+    ack
+    google-cloud-sdk
   ];
 })

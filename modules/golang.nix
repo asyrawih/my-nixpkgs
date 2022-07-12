@@ -1,5 +1,5 @@
-{ config, pgks, lib, ... }: 
+{ config, pgks, lib, ... }:
 {
-  programs.go.enable = true; 
+  programs.go.enable = true;
 }
 
