@@ -69,25 +69,25 @@
     ];
 
     programs.fish.shellInit = ''
-       eval "$(/usr/local/bin/brew shellenv)"
+      eval "$(/usr/local/bin/brew shellenv)"
 
-       zoxide init fish | source
+      zoxide init fish | source
 
-       for p in /run/current-system/sw/bin ~/bin
-           if not contains $p $fish_user_paths
-               set -g fish_user_paths $p $fish_user_paths
-           end
-       end
+      for p in /run/current-system/sw/bin ~/bin
+          if not contains $p $fish_user_paths
+              set -g fish_user_paths $p $fish_user_paths
+          end
+      end
 
-       # Config 
-       fish_vi_key_bindings
-       set -U fish_color_command 6CB6EB --bold
-       set -U fish_color_redirection DEB974
-       set -U fish_color_operator DEB974
-       set -U fish_color_end C071D8 --bold
-       set -U fish_color_error EC7279 --bold
-       set -U fish_color_param 6CB6EB
-       set fish_greeting
+      # Config 
+      fish_vi_key_bindings
+      set -U fish_color_command 6CB6EB --bold
+      set -U fish_color_redirection DEB974
+      set -U fish_color_operator DEB974
+      set -U fish_color_end C071D8 --bold
+      set -U fish_color_error EC7279 --bold
+      set -U fish_color_param 6CB6EB
+      set fish_greeting
 
     '';
 
